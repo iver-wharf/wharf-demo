@@ -1,0 +1,31 @@
+
+global:
+  url: wharf-demo.iver.com
+
+wharf-helm:
+  web:
+    oidcEnabled: true
+    oidc:
+      enabled: true
+
+  api:
+    extraEnvs:
+      - name: WHARF_HTTP_OIDC_ENABLE
+        value: "true"
+
+  ingressRoute:
+    enabled: true
+
+    entries:
+      - name: http
+        entryPoints:
+          - web
+        middlewares:
+          - name: httpredirect
+            namespace: default
+
+      - name: https
+        entryPoints:
+          - websecure
+        tls:
+          secretName: wharf-demo-tls
