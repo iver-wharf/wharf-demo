@@ -1,0 +1,9 @@
+
+my-stage:
+  my-step:
+    container:
+      image: ubuntu:20.04
+      cmds:
+        - echo "Hello from inside the step!"
+        - echo "This is running from ${GIT_BRANCH} (${GIT_COMMIT})"
+        - echo "All done here :)"
