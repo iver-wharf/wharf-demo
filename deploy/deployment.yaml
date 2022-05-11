@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wharf-demo
+  labels:
+    app: wharf-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wharf-demo
+  template:
+    metadata:
+      labels:
+        app: wharf-demo
+    spec:
+      containers:
+      - name: nginx
+        image: ${REG_URL}/iver-wharf/wharf-demo/web:${GIT_COMMIT}
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP
+

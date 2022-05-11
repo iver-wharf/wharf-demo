@@ -1,0 +1,25 @@
+environments:
+  demo:
+    deploy-cluster: wharf-demo-config
+    deploy-namespace: wharf-demo
+    web-host: wharf-demo.iver.com
+
+build:
+  web:
+    docker:
+      tag: ${GIT_COMMIT}
+      file: src/web/Dockerfile
+      context: src/web
+
+deploy:
+  environments: [demo]
+
+  web:
+    kubectl:
+      files:
+        - deploy/deployment.yaml
+        - deploy/service.yaml
+        - deploy/ingress.yaml
+      namespace: ${deploy-namespace}
+      cluster: ${deploy-cluster}
+
