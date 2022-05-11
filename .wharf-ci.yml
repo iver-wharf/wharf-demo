@@ -1,9 +1,13 @@
 
+inputs:
+  - name: yourname
+    type: string
+
 my-stage:
   my-step:
     container:
       image: ubuntu:20.04
       cmds:
-        - echo "Hello from inside the step!"
+        - echo "Hello ${yourname}, from inside the step!"
         - echo "This is running from ${GIT_BRANCH} (commit ${GIT_COMMIT})"
         - echo "All done here :)"
